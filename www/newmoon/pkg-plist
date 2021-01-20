@@ -11,7 +11,6 @@ lib/palemoon/browser/defaults/profile/chrome/userChrome-example.css
 lib/palemoon/browser/defaults/profile/chrome/userContent-example.css
 lib/palemoon/browser/extensions/{972ce4c6-7e08-4474-a285-3208198ce6fd}.xpi
 lib/palemoon/browser/icons/mozicon128.png
-lib/palemoon/browser/omni.ja
 lib/palemoon/browser/searchplugins/bing.xml
 lib/palemoon/browser/searchplugins/duckduckgo-palemoon.xml
 lib/palemoon/browser/searchplugins/ecosia.xml
@@ -47,7 +46,6 @@ lib/palemoon/libsoftokn3.chk
 lib/palemoon/libsoftokn3.so
 lib/palemoon/libssl3.so
 lib/palemoon/libxul.so
-lib/palemoon/omni.ja
 lib/palemoon/palemoon
 lib/palemoon/palemoon-bin
 lib/palemoon/platform.ini
