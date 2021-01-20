@@ -1,5 +1,5 @@
-TIMESTAMP = 1604571428
-SHA256 (MoonchildProductions/28.15.0_Release.tar.gz) = 1475113c47c5a44539c402dba46e3ff15bc7cf6a6303cdb755408a01cdff9a65
-SIZE (MoonchildProductions/28.15.0_Release.tar.gz) = 8535322
-SHA256 (MoonchildProductions/RELBASE_20201024.tar.gz) = 4a4c7e1751527b5d0231590978f14e55d70d70a8c654c8766aeeaedca0af6b58
-SIZE (MoonchildProductions/RELBASE_20201024.tar.gz) = 299700681
+TIMESTAMP = 1611163191
+SHA256 (MoonchildProductions/28.17.0_Release.tar.gz) = 4842fdf20d031a42b6b9e652d1e03035553f4f6de97c1b1c50744e1686fdff98
+SIZE (MoonchildProductions/28.17.0_Release.tar.gz) = 8535184
+SHA256 (MoonchildProductions/RELBASE_20201218.tar.gz) = b981cd33767e9238b2c1fdb5c58ffd76f30712bffa9792bc1d057ca5ed2b36db
+SIZE (MoonchildProductions/RELBASE_20201218.tar.gz) = 299711891
