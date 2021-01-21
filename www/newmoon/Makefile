@@ -33,7 +33,7 @@ LIB_DEPENDS=	libdbus-1.so:devel/dbus \
 		libfontconfig.so:x11-fonts/fontconfig \
 		libfreetype.so:print/freetype2
 
-USES=		dos2unix perl5 gmake gnome xorg desktop-file-utils
+USES=		dos2unix perl5 gmake gnome xorg desktop-file-utils pkgconfig
 # This is purely so that the patch applied to this file on NO_UAOVERRIDES can
 # be checked in cleanly into SVN.
 DOS2UNIX_FILES=	palemoon/branding/shared/pref/uaoverrides.inc
