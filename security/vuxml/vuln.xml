@@ -60,8 +60,9 @@ QUICK GUIDE TO ADDING A NEW ENTRY
 6. profit!
 
 Additional tests can be done this way:
- $ pkg audit -f ./vuln.xml py26-django-1.6
- $ pkg audit -f ./vuln.xml py27-django-1.6.1
+ $ make vuln-flat.xml
+ $ pkg audit -f ./vuln-flat.xml py26-django-1.6
+ $ pkg audit -f ./vuln-flat.xml py27-django-1.6.1
 
 Extensive documentation of the format and help with writing and verifying
 a new entry is available in The Porter's Handbook at:
@@ -76,6 +77,402 @@ Notes:
   * Do not forget port variants (linux-f10-libxml2, libxml2, etc.)
 -->
 <vuxml xmlns="http://www.vuxml.org/apps/vuxml-1">
+  <vuln vid="f3cf4b33-6013-11eb-9a0e-206a8a720317">
+    <topic>sudo -- Multiple vulnerabilities</topic>
+    <affects>
+      <package>
+       <name>sudo</name>
+       <range><lt>1.9.5p2</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+       <p>Todd C. Miller reports:</p>
+       <blockquote cite="https://www.sudo.ws/stable.html#1.9.5p2">
+	 <p>When invoked as sudoedit, the same set of command line options
+	    are now accepted as for sudo -e. The -H and -P options are now
+	    rejected for sudoedit and sudo -e which matches the sudo 1.7
+	    behavior. This is part of the fix for CVE-2021-3156.</p>
+	 <p>Fixed a potential buffer overflow when unescaping backslashes in
+	    the command's arguments. Normally, sudo escapes special characters
+	    when running a command via a shell (sudo -s or sudo -i). However,
+	    it was also possible to run sudoedit with the -s or -i flags in
+	    which case no escaping had actually been done, making a buffer
+	    overflow possible. This fixes CVE-2021-3156.</p>
+       </blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://www.sudo.ws/stable.html#1.9.5p2</url>
+      <cvename>CVE-2021-3156</cvename>
+    </references>
+    <dates>
+      <discovery>2021-01-26</discovery>
+      <entry>2021-01-26</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="fb67567a-5d95-11eb-a955-08002728f74c">
+    <topic>pysaml2 -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>py36-pysaml2</name>
+	<name>py37-pysaml2</name>
+	<name>py38-pysaml2</name>
+	<name>py39-pysaml2</name>
+	<range><lt>6.5.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>pysaml2 Releases:</p>
+	<blockquote cite="https://github.com/IdentityPython/pysaml2/releases">
+	  <p>Fix processing of invalid SAML XML documents - CVE-2021-21238</p>
+	  <p>Fix unspecified xmlsec1 key-type preference - CVE-2021-21239</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/IdentityPython/pysaml2/releases</url>
+      <url>https://github.com/IdentityPython/pysaml2/security/advisories/GHSA-f4g9-h89h-jgv9</url>
+      <url>https://github.com/IdentityPython/pysaml2/security/advisories/GHSA-5p3x-r448-pc62</url>
+      <cvename>CVE-2021-21238</cvename>
+      <cvename>CVE-2021-21239</cvename>
+    </references>
+    <dates>
+      <discovery>2021-01-20</discovery>
+      <entry>2021-01-26</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="425f2143-8876-4b0a-af84-e0238c5c2062">
+    <topic>jenkins -- Arbitrary file read vulnerability in workspace browsers</topic>
+    <affects>
+      <package>
+	<name>jenkins</name>
+	<range><lt>2.276</lt></range>
+      </package>
+      <package>
+	<name>jenkins-lts</name>
+	<range><lt>2.263.3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Jenkins Security Advisory:</p>
+	<blockquote cite="https://www.jenkins.io/security/advisory/2021-01-26/">
+	  <h1>Description</h1>
+	  <h5>(Medium) SECURITY-2197 / CVE-2021-21615</h5>
+	  <p>Arbitrary file read vulnerability in workspace browsers</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://www.jenkins.io/security/advisory/2021-01-26/</url>
+    </references>
+    <dates>
+      <discovery>2021-01-26</discovery>
+      <entry>2021-01-26</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="387bbade-5d1d-11eb-bf20-4437e6ad11c4">
+    <topic>mutt -- denial of service</topic>
+    <affects>
+      <package>
+	<name>mutt</name>
+	<range><lt>2.0.5</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Tavis Ormandy reports:</p>
+	<blockquote cite="https://gitlab.com/muttmua/mutt/-/issues/323">
+	  <p>
+	    rfc822.c in Mutt through 2.0.4 allows remote attackers to cause a
+	    denial of service (mailbox unavailability) by sending email messages
+	    with sequences of semicolon characters in RFC822 address fields
+	    (aka terminators of empty groups). A small email message from the
+	    attacker can cause large memory consumption, and the victim
+	    may then be unable to see email messages from other persons.
+	  </p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+    <url>https://gitlab.com/muttmua/mutt/-/issues/323</url>
+    <cvename>CVE-2021-3181</cvename>
+    </references>
+    <dates>
+      <discovery>2021-01-17</discovery>
+      <entry>2021-01-23</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="31344707-5d87-11eb-929d-d4c9ef517024">
+    <topic>MySQL -- Multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>mysql56-client</name>
+	<range><lt>5.6.51</lt></range>
+      </package>
+      <package>
+	<name>mysql57-client</name>
+	<range><lt>5.7.33</lt></range>
+      </package>
+      <package>
+	<name>mysql80-client</name>
+	<range><lt>8.0.23</lt></range>
+      </package>
+      <package>
+	<name>mysql56-server</name>
+	<range><lt>5.6.51</lt></range>
+      </package>
+      <package>
+	<name>mysql57-server</name>
+	<range><lt>5.7.33</lt></range>
+      </package>
+      <package>
+	<name>mysql80-server</name>
+	<range><lt>8.0.23</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Oracle reports:</p>
+	<blockquote cite="https://www.oracle.com/security-alerts/cpujan2021.html#AppendixMSQL">
+	  <p>This Critical Patch Update contains 34 new security patches for
+	    Oracle MySQL Server and 4 for MySQL Client. </p>
+	  <p>The highest CVSS v3.1 Base Score of vulnerabilities affecting Oracle
+	    MySQL is 6.8.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://www.oracle.com/security-alerts/cpujan2021.html#AppendixMSQL</url>
+      <url>CVE-2021-2046</url>
+      <url>CVE-2021-2020</url>
+      <url>CVE-2021-2024</url>
+      <url>CVE-2021-2011</url>
+      <url>CVE-2021-2006</url>
+      <url>CVE-2021-2048</url>
+      <url>CVE-2021-2028</url>
+      <url>CVE-2021-2122</url>
+      <url>CVE-2021-2058</url>
+      <url>CVE-2021-2001</url>
+      <url>CVE-2021-2016</url>
+      <url>CVE-2021-2021</url>
+      <url>CVE-2021-2030</url>
+      <url>CVE-2021-2031</url>
+      <url>CVE-2021-2036</url>
+      <url>CVE-2021-2055</url>
+      <url>CVE-2021-2060</url>
+      <url>CVE-2021-2070</url>
+      <url>CVE-2021-2076</url>
+      <url>CVE-2021-2065</url>
+      <url>CVE-2021-2014</url>
+      <url>CVE-2021-2002</url>
+      <url>CVE-2021-2012</url>
+      <url>CVE-2021-2009</url>
+      <url>CVE-2021-2072</url>
+      <url>CVE-2021-2081</url>
+      <url>CVE-2021-2022</url>
+      <url>CVE-2021-2038</url>
+      <url>CVE-2021-2061</url>
+      <url>CVE-2021-2056</url>
+      <url>CVE-2021-2087</url>
+      <url>CVE-2021-2088</url>
+      <url>CVE-2021-2032</url>
+      <url>CVE-2021-2010</url>
+      <url>CVE-2021-1998</url>
+      <url>CVE-2021-2007</url>
+      <url>CVE-2021-2019</url>
+      <url>CVE-2021-2042</url>
+    </references>
+    <dates>
+      <discovery>2021-01-23</discovery>
+      <entry>2021-01-23</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="4ed0e43c-5cef-11eb-bafd-3065ec8fd3ec">
+    <topic>chromium -- multiple vulnerabilities</topic>
+    <affects>
+      <package>
+	<name>chromium</name>
+	<range><lt>88.0.4324.96</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Chrome Releases reports:</p>
+	<blockquote cite="https://chromereleases.googleblog.com/2021/01/stable-channel-update-for-desktop_19.html">
+	  <p>This release contains 36 security fixes, including:</p>
+	  <ul>
+	    <li>[1137179] Critical CVE-2021-21117: Insufficient policy
+	      enforcement in Cryptohome. Reported by Rory McNamara on
+	      2020-10-10</li>
+	    <li>[1161357] High CVE-2021-21118: Insufficient data validation in
+	      V8. Reported by Tyler Nighswander (@tylerni7) of Theori on
+	      2020-12-23</li>
+	    <li>[1160534] High CVE-2021-21119: Use after free in Media. Reported
+	      by Anonymous on 2020-12-20</li>
+	    <li>[1160602] High CVE-2021-21120: Use after free in WebSQL.
+	      Reported by Nan Wang(@eternalsakura13) and Guang Gong of 360 Alpha
+	      Lab on 2020-12-21</li>
+	    <li>[1161143] High CVE-2021-21121: Use after free in Omnibox.
+	      Reported by Leecraso and Guang Gong of 360 Alpha Lab on
+	      2020-12-22</li>
+	    <li>[1162131] High CVE-2021-21122: Use after free in Blink. Reported
+	      by Renata Hodovan on 2020-12-28</li>
+	    <li>[1137247] High CVE-2021-21123: Insufficient data validation in
+	      File System API. Reported by Maciej Pulikowski on 2020-10-11</li>
+	    <li>[1131346] High CVE-2021-21124: Potential user after free in
+	      Speech Recognizer. Reported by Chaoyang Ding(@V4kst1z) from
+	      Codesafe Team of Legendsec at Qi'anxin Group on 2020-09-23</li>
+	    <li>[1152327] High CVE-2021-21125: Insufficient policy enforcement
+	      in File System API. Reported by Ron Masas (Imperva) on
+	      2020-11-24</li>
+	    <li>[1163228] High CVE-2020-16044: Use after free in WebRTC.
+	      Reported by Ned Williamson of Project Zero on 2021-01-05</li>
+	    <li>[1108126] Medium CVE-2021-21126: Insufficient policy enforcement
+	      in extensions. Reported by David Erceg on 2020-07-22</li>
+	    <li>[1115590] Medium CVE-2021-21127: Insufficient policy enforcement
+	      in extensions. Reported by Jasminder Pal Singh, Web Services Point
+	      WSP, Kotkapura on 2020-08-12</li>
+	    <li>[1138877] Medium CVE-2021-21128: Heap buffer overflow in Blink.
+	      Reported by Liang Dong on 2020-10-15</li>
+	    <li>[1140403] Medium CVE-2021-21129: Insufficient policy enforcement
+	      in File System API. Reported by Maciej Pulikowski on
+	      2020-10-20</li>
+	    <li>[1140410] Medium CVE-2021-21130: Insufficient policy enforcement
+	      in File System API. Reported by Maciej Pulikowski on
+	      2020-10-20</li>
+	    <li>[1140417] Medium CVE-2021-21131: Insufficient policy enforcement
+	      in File System API. Reported by Maciej Pulikowski on
+	      2020-10-20</li>
+	    <li>[1128206] Medium CVE-2021-21132: Inappropriate implementation in
+	      DevTools. Reported by David Erceg on 2020-09-15</li>
+	    <li>[1157743] Medium CVE-2021-21133: Insufficient policy enforcement
+	      in Downloads. Reported by wester0x01
+	      (https://twitter.com/wester0x01) on 2020-12-11</li>
+	    <li>[1157800] Medium CVE-2021-21134: Incorrect security UI in Page
+	      Info. Reported by wester0x01 (https://twitter.com/wester0x01) on
+	      2020-12-11</li>
+	    <li>[1157818] Medium CVE-2021-21135: Inappropriate implementation in
+	      Performance API. Reported by ndevtk on 2020-12-11</li>
+	    <li>[1038002] Low CVE-2021-21136: Insufficient policy enforcement in
+	      WebView. Reported by Shiv Sahni, Movnavinothan V and Imdad
+	      Mohammed on 2019-12-27</li>
+	    <li>[1093791] Low CVE-2021-21137: Inappropriate implementation in
+	      DevTools. Reported by bobblybear on 2020-06-11</li>
+	    <li>[1122487] Low CVE-2021-21138: Use after free in DevTools.
+	      Reported by Weipeng Jiang (@Krace) from Codesafe Team of Legendsec
+	      at Qi'anxin Group on 2020-08-27</li>
+	    <li>[1136327] Low CVE-2021-21140: Uninitialized Use in USB. Reported
+	      by David Manouchehri on 2020-10-08</li>
+	    <li>[1140435] Low CVE-2021-21141: Insufficient policy enforcement in
+	      File System API. Reported by Maciej Pulikowski on 2020-10-20</li>
+	  </ul>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <cvename>CVE-2020-16044</cvename>
+      <cvename>CVE-2021-21117</cvename>
+      <cvename>CVE-2021-21118</cvename>
+      <cvename>CVE-2021-21119</cvename>
+      <cvename>CVE-2021-21120</cvename>
+      <cvename>CVE-2021-21121</cvename>
+      <cvename>CVE-2021-21122</cvename>
+      <cvename>CVE-2021-21123</cvename>
+      <cvename>CVE-2021-21124</cvename>
+      <cvename>CVE-2021-21125</cvename>
+      <cvename>CVE-2021-21126</cvename>
+      <cvename>CVE-2021-21127</cvename>
+      <cvename>CVE-2021-21128</cvename>
+      <cvename>CVE-2021-21129</cvename>
+      <cvename>CVE-2021-21130</cvename>
+      <cvename>CVE-2021-21131</cvename>
+      <cvename>CVE-2021-21132</cvename>
+      <cvename>CVE-2021-21133</cvename>
+      <cvename>CVE-2021-21134</cvename>
+      <cvename>CVE-2021-21135</cvename>
+      <cvename>CVE-2021-21136</cvename>
+      <cvename>CVE-2021-21137</cvename>
+      <cvename>CVE-2021-21138</cvename>
+      <cvename>CVE-2021-21139</cvename>
+      <cvename>CVE-2021-21140</cvename>
+      <cvename>CVE-2021-21141</cvename>
+      <url>https://chromereleases.googleblog.com/2021/01/stable-channel-update-for-desktop_19.html</url>
+    </references>
+    <dates>
+      <discovery>2021-01-19</discovery>
+      <entry>2021-01-22</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="35aef72c-5c8e-11eb-8309-4ccc6adda413">
+    <topic>chocolate-doom -- Arbitrary code execution</topic>
+    <affects>
+      <package>
+	<name>chocolate-doom</name>
+	<range><lt>3.0.1</lt></range>
+      </package>
+      <package>
+	<name>crispy-doom</name>
+	<range><lt>5.9.0</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Michal Dardas from LogicalTrust reports:</p>
+	<blockquote cite="https://github.com/chocolate-doom/chocolate-doom/issues/1293">
+	  <p>
+	    The server in Chocolate Doom 3.0.0 and Crispy Doom 5.8.0 doesn't validate
+	    the user-controlled num_players value, leading to a buffer overflow. A
+	    malicious user can overwrite the server's stack.
+	  </p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://github.com/chocolate-doom/chocolate-doom/issues/1293</url>
+      <cvename>CVE-2020-14983</cvename>
+    </references>
+    <dates>
+      <discovery>2020-06-22</discovery>
+      <entry>2021-01-22</entry>
+    </dates>
+  </vuln>
+
+  <vuln vid="13c54e6d-5c45-11eb-b4e2-001b217b3468">
+    <topic>nokogiri -- Security vulnerability</topic>
+    <affects>
+      <package>
+	<name>rubygem-nokogiri</name>
+	<name>rubygem-nokogiri18</name>
+	<range><lt>1.11.0.rc3</lt></range>
+      </package>
+    </affects>
+    <description>
+      <body xmlns="http://www.w3.org/1999/xhtml">
+	<p>Nokogiri reports:</p>
+	<blockquote cite="https://nokogiri.org/CHANGELOG.html">
+	  <p>In Nokogiri versions &lt;= 1.11.0.rc3, XML Schemas parsed by Nokogiri::XML::Schema were trusted by default, allowing external resources to be accessed over the network, potentially enabling XXE or SSRF attacks.</p>
+	</blockquote>
+      </body>
+    </description>
+    <references>
+      <url>https://nokogiri.org/CHANGELOG.html</url>
+      <cvename>CVE-2020-26247</cvename>
+    </references>
+    <dates>
+      <discovery>2021-01-22</discovery>
+      <entry>2021-01-22</entry>
+    </dates>
+  </vuln>
+
   <vuln vid="5b5cf6e5-5b51-11eb-95ac-7f9491278677">
     <topic>dnsmasq -- DNS cache poisoning, and DNSSEC buffer overflow, vulnerabilities</topic>
     <affects>
@@ -13829,25 +14226,24 @@ whitespace)
     </dates>
   </vuln>
 
-  &vuln-2019;
-  &vuln-2018;
-  &vuln-2017;
-  &vuln-2016;
-  &vuln-2015;
-  &vuln-2014;
-  &vuln-2013;
-  &vuln-2012;
-  &vuln-2011;
-  &vuln-2010;
-  &vuln-2009;
-  &vuln-2008;
-  &vuln-2007;
-  &vuln-2006;
-  &vuln-2005;
-  &vuln-2004;
-  &vuln-2003;
-
-</vuxml><!-- EOF -->
+&vuln-2019;
+&vuln-2018;
+&vuln-2017;
+&vuln-2016;
+&vuln-2015;
+&vuln-2014;
+&vuln-2013;
+&vuln-2012;
+&vuln-2011;
+&vuln-2010;
+&vuln-2009;
+&vuln-2008;
+&vuln-2007;
+&vuln-2006;
+&vuln-2005;
+&vuln-2004;
+&vuln-2003;</vuxml>
+<!-- EOF -->
 <!-- Note:  Please add new entries to the beginning of this file. -->
 <!-- ex: set ts=8 tw=80 sw=2: -->
 <!-- vim: set softtabstop=2 noexpandtab: -->
