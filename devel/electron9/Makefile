@@ -3,6 +3,7 @@
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
+PORTREVISION=	1
 CATEGORIES=	devel java
 MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v9.4.0/:chromium \
 		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
@@ -132,7 +133,7 @@ NODE_VER=			12.14.1
 # See ${WRKSRC}/electron/DEPS for NAN_VER
 NAN_VER=			2ee313aaca52e2b478965ac50eb5082520380d1b
 
-YARN_TIMESTAMP=	1610600411
+YARN_TIMESTAMP=	1611835338
 
 GN_ARGS+=		clang_use_chrome_plugins=false \
 			enable_hangout_services_extension=true \

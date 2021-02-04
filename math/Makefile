@@ -859,12 +859,12 @@
     SUBDIR += py-spglm
     SUBDIR += py-spint
     SUBDIR += py-splot
+    SUBDIR += py-spopt
     SUBDIR += py-spot
     SUBDIR += py-spreg
     SUBDIR += py-spvcm
     SUBDIR += py-ssm
     SUBDIR += py-statsmodels
-    SUBDIR += py-statsmodels010
     SUBDIR += py-svgmath
     SUBDIR += py-sym
     SUBDIR += py-symcxx
