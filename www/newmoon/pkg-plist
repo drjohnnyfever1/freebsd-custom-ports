@@ -37,8 +37,6 @@ lib/palemoon/libmozsqlite3.so
 lib/palemoon/libnspr4.so
 lib/palemoon/libnss3.so
 lib/palemoon/libnssckbi.so
-lib/palemoon/libnssdbm3.chk
-lib/palemoon/libnssdbm3.so
 lib/palemoon/libnssutil3.so
 lib/palemoon/libplc4.so
 lib/palemoon/libplds4.so
