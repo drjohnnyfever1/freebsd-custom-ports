@@ -2,11 +2,11 @@
 # Created by Olivier Certner <olce.freebsd.ports@certner.fr>
 
 PORTNAME=	newmoon
-DISTVERSION=	28.17.0
+DISTVERSION=	29.0.0
 # UXP_VERSION has to be updated according to DISTVERSION (see recorded commit
 # of the 'platform' git sub-module and corresponding release in UXP/releases;
 # see MASTER_SITES for base URLs).
-UXP_VERSION=	20201218
+UXP_VERSION=	20210202
 CATEGORIES=	www
 MASTER_SITES=	https://repo.palemoon.org/MoonchildProductions/Pale-Moon/archive/:palemoon \
 		https://repo.palemoon.org/MoonchildProductions/UXP/archive/:uxp
