@@ -887,14 +887,10 @@
     SUBDIR += grcov
     SUBDIR += grex
     SUBDIR += grpc
+    SUBDIR += grpc134
     SUBDIR += grv
     SUBDIR += gsettings-desktop-schemas
     SUBDIR += gsoap
-    SUBDIR += gstreamer-plugins-gconf
-    SUBDIR += gstreamer-plugins-gio
-    SUBDIR += gstreamer-plugins-gnomevfs
-    SUBDIR += gstreamer-plugins-sdl
-    SUBDIR += gstreamer-plugins-soup
     SUBDIR += gstreamer1-plugins-soup
     SUBDIR += gtgt
     SUBDIR += gtranslator
@@ -2277,6 +2273,7 @@
     SUBDIR += p5-Devel-StackTrace-AsHTML
     SUBDIR += p5-Devel-StackTrace-WithLexicals
     SUBDIR += p5-Devel-StealthDebug
+    SUBDIR += p5-Devel-StrictMode
     SUBDIR += p5-Devel-Symdump
     SUBDIR += p5-Devel-Timer
     SUBDIR += p5-Devel-Trace

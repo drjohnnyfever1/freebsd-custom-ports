@@ -214,7 +214,6 @@
     SUBDIR += gsocket
     SUBDIR += gspoof
     SUBDIR += gssdp
-    SUBDIR += gstreamer-plugins-libmms
     SUBDIR += gstreamer1-plugins-libmms
     SUBDIR += gstreamer1-plugins-srtp
     SUBDIR += gtk-vnc
@@ -1258,6 +1257,7 @@
     SUBDIR += rubygem-google-cloud-storage
     SUBDIR += rubygem-grpc
     SUBDIR += rubygem-grpc124
+    SUBDIR += rubygem-grpc130
     SUBDIR += rubygem-hangouts-chat
     SUBDIR += rubygem-http-parser
     SUBDIR += rubygem-http_parser.rb
