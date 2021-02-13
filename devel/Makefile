@@ -22,6 +22,7 @@
     SUBDIR += R-cran-bit
     SUBDIR += R-cran-bit64
     SUBDIR += R-cran-bitops
+    SUBDIR += R-cran-blob
     SUBDIR += R-cran-brio
     SUBDIR += R-cran-broom
     SUBDIR += R-cran-caTools
@@ -105,6 +106,7 @@
     SUBDIR += R-cran-uuid
     SUBDIR += R-cran-vcd
     SUBDIR += R-cran-vctrs
+    SUBDIR += R-cran-whisker
     SUBDIR += R-cran-withr
     SUBDIR += R-cran-zeallot
     SUBDIR += RStudio
@@ -367,6 +369,7 @@
     SUBDIR += codeblocks
     SUBDIR += codequery
     SUBDIR += codesearch-py
+    SUBDIR += codeville
     SUBDIR += codeworker
     SUBDIR += collada-dom
     SUBDIR += color
@@ -533,7 +536,7 @@
     SUBDIR += efl
     SUBDIR += egypt
     SUBDIR += eiffelstudio
-    SUBDIR += electron9
+    SUBDIR += electron11
     SUBDIR += elf
     SUBDIR += elfio
     SUBDIR += elfkickers
