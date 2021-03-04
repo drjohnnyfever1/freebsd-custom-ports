@@ -1,22 +1,26 @@
 # $FreeBSD$
-# Created by Olivier Certner <olce.freebsd.ports@certner.fr>
 
-PORTNAME=	newmoon
+PORTNAME=	palemoon
+# UXP_VERSION below *MUST BE UPDATED* according to DISTVERSION (see recorded
+# commit of the 'platform' git sub-module and corresponding release in
+# UXP/releases; see MASTER_SITES for base URLs).
 DISTVERSION=	29.1.0
-# UXP_VERSION has to be updated according to DISTVERSION (see recorded commit
-# of the 'platform' git sub-module and corresponding release in UXP/releases;
-# see MASTER_SITES for base URLs).
-UXP_VERSION=	20210302
 CATEGORIES=	www
 MASTER_SITES=	https://repo.palemoon.org/MoonchildProductions/Pale-Moon/archive/:palemoon \
 		https://repo.palemoon.org/MoonchildProductions/UXP/archive/:uxp
 DISTFILES=	${DISTVERSION}_Release.tar.gz:palemoon \
 		RELBASE_${UXP_VERSION}.tar.gz:uxp
 DIST_SUBDIR=	MoonchildProductions
-WRKSRC=		${WRKDIR}/pale-moon
 
 MAINTAINER=	olce.freebsd.ports@certner.fr
-COMMENT=	Open-source web browser mostly using Pale Moon(TM) code
+COMMENT=	Open-source web browser
+
+LICENSE=	MPL20 MISC
+LICENSE_COMB=	multi
+LICENSE_NAME_MISC=	Miscellaneous free and open-source licenses
+LICENSE_FILE=	${WRKSRC}/LICENSE
+LICENSE_FILE_MISC=	${WRKSRC}/platform/toolkit/content/license.html
+LICENSE_PERMS_MISC=	dist-mirror pkg-mirror auto-accept
 
 # Not sure about the real status of ARM, but only ARM packages of old versions of
 # PM are available in some Linux distros.
@@ -33,22 +37,26 @@ LIB_DEPENDS=	libdbus-1.so:devel/dbus \
 		libfontconfig.so:x11-fonts/fontconfig \
 		libfreetype.so:print/freetype2
 
-USES=		dos2unix perl5 gmake gnome xorg desktop-file-utils pkgconfig
-# This is purely so that the patch applied to this file on NO_UAOVERRIDES can
-# be checked in cleanly into SVN.
-DOS2UNIX_FILES=	palemoon/branding/shared/pref/uaoverrides.inc
+USES=		pkgconfig perl5 gmake gnome xorg desktop-file-utils
 USE_PERL5=	build
-USE_GNOME=	cairo gdkpixbuf2 glib20 pango
+# XXX
+# GTK3 support currently needs gtk20 and gconf2 to pass old-configure (and
+# maybe more).
+# See also: https://repo.palemoon.org/MoonchildProductions/UXP/issues/1638.
+USE_GNOME=	cairo gdkpixbuf2 glib20 pango \
+		gtk30 gtk20:build gconf2:build
 USE_XORG=	xt x11 xcb xext xrender
 # 9 is the last version endorsed upstream (and was the default in ports when
-# this was written). Should ideally be bumped with GCC's default version, but
-# *only if* validated by upstream (or thoroughly tested by us). Hence
+# this was written). Version bumps *MUST* be validated by the maintainer (after
+# thorough testing, and following upstream's recommendations. Hence
 # hardcoded. (For the record, building with clang produces malfunctioning
 # executables.)
-# NOTE: We make sure that there are no runtime dependencies to GCC. See
-# [GCC-no-rdep-*] tags below. This should rather be solved in the ports
-# infrastructure proper (see PR 211154; also, allowing to choose among C++
-# standard libraries, besides providing a common default, would be great).
+
+# NOTE: We make sure that there are no runtime dependencies to GCC and
+# libstdc++. See [GCC-no-rdep-*] tags below. This should rather be solved in
+# the ports infrastructure proper (see PR 211154, which is a step towards that;
+# however, it still doesn't remove -rpath and doesn't provide the option to
+# link C++ code against base's libc++).
 USE_GCC=	9
 
 # Put this here pending creation of USES=gtar
@@ -62,40 +70,40 @@ BINARY_ALIAS+=	python=${LOCALBASE}/bin/tauthon \
 
 BUNDLE_LIBS=	yes
 
-# Options
+## Options
 
-OPTIONS_SINGLE+=	GUI
-OPTIONS_SINGLE_GUI=	GTK2 GTK3
-OPTIONS_DEFAULT+=	GTK3
+# Official branding is enabled in compliance with Pale Moon's redistribution
+# license (see https://www.palemoon.org/redist.shtml), point 8b, as explicitly
+# confirmed by the owner (Moonchild; see
+# https://forum.palemoon.org/viewtopic.php?f=5&t=25625), provided options are
+# not modified beyond what is necessary to get a stable build on FreeBSD. So DO
+# NOT CHANGE default options without the maintainer's approval.
 
 OPTIONS_SINGLE+=	SOUND
 OPTIONS_SINGLE_SOUND=	ALSA PULSEAUDIO
 OPTIONS_DEFAULT+=	ALSA
 
-OPTIONS_DEFINE+= 	SYNC NO_UAOVERRIDES
+OPTIONS_DEFINE+=	SYNC
+OPTIONS_DEFAULT+=	SYNC
 
-SYNC_DESC=		Pale Moon Sync service (see https://www.palemoon.org/sync/)
-NO_UAOVERRIDES_DESC=	Deactivate default User Agent overrides (prefs renamed)
-
-GTK2_USE=		gnome=gtk20,gconf2
-# XXX
-# GTK3 needs gtk20 and gconf2 to pass old-configure (and maybe more).
-# See also: https://repo.palemoon.org/MoonchildProductions/UXP/issues/1638.
-GTK3_USE=		gnome=gtk30,gtk20:build,gconf2:build
-
-OPTIONS_SUB=		yes
+OPTIONS_DEFINE+=	SYSTEM_MALLOC
 
 ALSA_BUILD_DEPENDS=	${PREFIX}/include/alsa/asoundlib.h:audio/alsa-lib
 ALSA_LIB_DEPENDS=	libasound.so:audio/alsa-lib
 PULSEAUDIO_BUILD_DEPENDS=${LOCALBASE}/include/pulse/pulseaudio.h:audio/pulseaudio
 PULSEAUDIO_LIB_DEPENDS=	libpulse.so:audio/pulseaudio
 
-NO_UAOVERRIDES_EXTRA_PATCHES= \
-${PATCHDIR}/no_uaoverrides_patch-palemoon_branding_shared_pref_uaoverrides.inc
+SYNC_DESC=		Pale Moon Sync service (see https://www.palemoon.org/sync/)
+
+SYSTEM_MALLOC_DESC=	Use system's jemalloc instead of bundled one
 
 .include <bsd.port.options.mk>
 
-# Vars and targets
+## Vars and targets
+
+UXP_VERSION=	20210302
+
+WRKSRC=		${WRKDIR}/pale-moon
 
 # Have GCC link with libc++. Needed because some library dependencies (e.g.,
 # libgraphite2.so) are linked against libc++ already, and mixing both with this
@@ -113,27 +121,14 @@ LDFLAGS+=	-lgcc
 DOT_MOZCONFIG=	${WRKSRC}/.mozconfig
 PM_BUILD_DIR=	${WRKSRC}/pmbuild
 
-NEWMOON_DESKTOP=${WRKSRC}/palemoon/branding/unofficial/browser.desktop
-
-.if ${PORT_OPTIONS:MGTK3}
-PM_GTK_VERSION:=3
-.else
-PM_GTK_VERSION:=2
-.endif
-
-.if ${ARCH} == "amd64"
-PM_BUILD_64=_BUILD_64=1
-.else
-PM_BUILD_64=
-.endif
+PALEMOON_DESKTOP=${WRKSRC}/palemoon/branding/official/palemoon.desktop
 
 # Extract only -O options
 PM_OPTIMIZE=${CFLAGS:M-O*}
 
-.for VAR in PM_BUILD_64 PM_GTK_VERSION PM_BUILD_DIR PM_OPTIMIZE
+.for VAR in PM_BUILD_DIR PM_OPTIMIZE
 PM_MOZCONFIG_REINPLACE_ARGS+=-e 's!%%${VAR}%%!${${VAR}}!'
 .endfor
-
 
 # Taken from bsd.gecko.mk. See comment there.
 .if defined(DISABLE_MAKE_JOBS) || defined(MAKE_JOBS_UNSAFE)
@@ -142,7 +137,6 @@ MAKE_JOBS_NUMBER=	1
 .if defined(MAKE_JOBS_NUMBER)
 MOZ_MAKE_FLAGS+=	-j${MAKE_JOBS_NUMBER}
 .endif
-
 
 post-extract:
 	${RMDIR} ${WRKSRC}/platform
@@ -159,12 +153,11 @@ pre-configure:
 .if ! ${PORT_OPTIONS:MSYNC}
 	${ECHO_CMD} ac_add_options --disable-sync >> ${DOT_MOZCONFIG}
 .endif
-# .if ${PORT_OPTIONS:MDEBUG}
-# 	${ECHO_CMD} ac_add_options --disable-strip >> ${DOT_MOZCONFIG}
-# 	${ECHO_CMD} ac_add_options --disable-install-strip >> ${DOT_MOZCONFIG}
-# # Causes compile error
-# #	${ECHO_CMD} ac_add_options --enable-debug >> ${DOT_MOZCONFIG}
-# .endif
+.if ${PORT_OPTIONS:MSYSTEM_MALLOC}
+	${ECHO_CMD} ac_add_options --disable-jemalloc >> ${DOT_MOZCONFIG}
+.else
+	${ECHO_CMD} ac_add_options --enable-jemalloc >> ${DOT_MOZCONFIG}
+.endif
 .if defined(MOZ_MAKE_FLAGS)
 	${ECHO_CMD} mk_add_options MOZ_MAKE_FLAGS=${MOZ_MAKE_FLAGS:Q} \
 		>> ${DOT_MOZCONFIG}
@@ -180,7 +173,7 @@ pre-configure:
 
 # Running 'mach configure' separately is "strongly discouraged" (see Mozilla's
 # doc on build options configuration). Still, things seem to work correctly
-# even with this separate step.
+# here even with this separate step.
 do-configure:
 	cd ${WRKSRC} && ${SETENV} PATH=${PATH} ./mach configure
 
@@ -195,11 +188,9 @@ do-install:
 		palemoon
 	${RLN}  ${STAGEDIR}${PREFIX}/lib/palemoon/palemoon \
 		${STAGEDIR}${PREFIX}/bin/palemoon
-	${INSTALL_DATA} ${NEWMOON_DESKTOP} \
-		${STAGEDIR}${PREFIX}/share/applications/newmoon.desktop
+	${INSTALL_DATA} ${PALEMOON_DESKTOP} \
+		${STAGEDIR}${PREFIX}/share/applications/palemoon.desktop
 	${RLN}  ${STAGEDIR}${PREFIX}/lib/palemoon/browser/icons/mozicon128.png \
 		${STAGEDIR}${PREFIX}/share/pixmaps/palemoon.png
 
 .include <bsd.port.mk>
-# [GCC-no-rdep-3]
-RUN_DEPENDS:=	${RUN_DEPENDS:Ngcc*}
