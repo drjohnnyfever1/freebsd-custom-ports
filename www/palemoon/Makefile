@@ -194,3 +194,5 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/pixmaps/palemoon.png
 
 .include <bsd.port.mk>
+# [GCC-no-rdep-3]
+RUN_DEPENDS:=	${RUN_DEPENDS:Ngcc*}
