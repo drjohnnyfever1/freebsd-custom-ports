@@ -1092,6 +1092,7 @@
     SUBDIR += libCello
     SUBDIR += libIDL
     SUBDIR += libPropList
+    SUBDIR += libabigail
     SUBDIR += libafterbase
     SUBDIR += liballium
     SUBDIR += libantlr3c
@@ -1421,7 +1422,7 @@
     SUBDIR += llvm-devel
     SUBDIR += llvm10
     SUBDIR += llvm11
-    SUBDIR += llvm60
+    SUBDIR += llvm12
     SUBDIR += llvm70
     SUBDIR += llvm80
     SUBDIR += llvm90
