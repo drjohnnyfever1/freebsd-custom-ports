@@ -1314,6 +1314,7 @@
     SUBDIR += libsavitar
     SUBDIR += libscca
     SUBDIR += libsearpc
+    SUBDIR += libserdes
     SUBDIR += libserialport
     SUBDIR += libshbuf
     SUBDIR += libshhmsg
@@ -1376,6 +1377,7 @@
     SUBDIR += libvirt-java
     SUBDIR += libvmdk
     SUBDIR += libvolume_id
+    SUBDIR += libvsgpt
     SUBDIR += libvshadow
     SUBDIR += libvslvm
     SUBDIR += libvterm
@@ -1440,6 +1442,7 @@
     SUBDIR += log4net
     SUBDIR += log4sh
     SUBDIR += log4shib
+    SUBDIR += loguru
     SUBDIR += lokalize
     SUBDIR += loki
     SUBDIR += love
@@ -3704,6 +3707,7 @@
     SUBDIR += pasm
     SUBDIR += patch
     SUBDIR += pcc-libs
+    SUBDIR += pcg-cpp
     SUBDIR += pcl
     SUBDIR += pcre
     SUBDIR += pcre++
@@ -4692,6 +4696,7 @@
     SUBDIR += py-onigurumacffi
     SUBDIR += py-opcodes
     SUBDIR += py-openapi-codec
+    SUBDIR += py-openapi-schema-validator
     SUBDIR += py-openapi-spec-validator
     SUBDIR += py-opencensus
     SUBDIR += py-opencensus-context
@@ -4704,6 +4709,7 @@
     SUBDIR += py-optik
     SUBDIR += py-orange-canvas-core
     SUBDIR += py-orange-widget-base
+    SUBDIR += py-orca
     SUBDIR += py-ordered-set
     SUBDIR += py-ordereddict
     SUBDIR += py-orderedmultidict
@@ -5415,6 +5421,7 @@
     SUBDIR += reproc
     SUBDIR += resolv_wrapper
     SUBDIR += revive
+    SUBDIR += rgbds
     SUBDIR += rhtvision
     SUBDIR += rinutils
     SUBDIR += riscv32-unknown-elf-gcc
@@ -6180,6 +6187,7 @@
     SUBDIR += rubygem-google-apis-storage_v1
     SUBDIR += rubygem-google-gax
     SUBDIR += rubygem-google-protobuf
+    SUBDIR += rubygem-google-protobuf314
     SUBDIR += rubygem-google-protobuf38
     SUBDIR += rubygem-googleapis-common-protos
     SUBDIR += rubygem-googleapis-common-protos-types

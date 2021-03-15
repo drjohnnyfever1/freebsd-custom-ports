@@ -107,6 +107,7 @@
     SUBDIR += cracklib
     SUBDIR += crackpkcs12
     SUBDIR += create-cert
+    SUBDIR += crowdsec
     SUBDIR += cryptlib
     SUBDIR += cryptopp
     SUBDIR += ct-submit
@@ -1272,6 +1273,7 @@
     SUBDIR += tthsum
     SUBDIR += u2f-devd
     SUBDIR += uacme
+    SUBDIR += ubuntu-keyring
     SUBDIR += unhide
     SUBDIR += unicornscan
     SUBDIR += vanguards-tor
