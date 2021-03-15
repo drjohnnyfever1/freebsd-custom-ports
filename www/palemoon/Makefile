@@ -57,7 +57,7 @@ USE_XORG=	xt x11 xcb xext xrender
 # the ports infrastructure proper (see PR 211154, which is a step towards that;
 # however, it still doesn't remove -rpath and doesn't provide the option to
 # link C++ code against base's libc++).
-USE_GCC=	9
+USE_GCC=	10
 
 # Put this here pending creation of USES=gtar
 BUILD_DEPENDS+=	gtar:archivers/gtar
